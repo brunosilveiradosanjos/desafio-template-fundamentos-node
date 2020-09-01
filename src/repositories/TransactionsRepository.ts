@@ -6,6 +6,15 @@ interface Balance {
   total: number;
 }
 
+// 3 passo:
+// * interface de criação da transação
+
+interface CreateTransactionDTO {
+  title: string,
+  value: number,
+  type: 'income' | 'outcome';
+}
+
 class TransactionsRepository {
   private transactions: Transaction[];
 
@@ -21,8 +30,18 @@ class TransactionsRepository {
     // TODO
   }
 
-  public create(): Transaction {
+  // * a model é responsável pela criação de um novo objeto
+  public create({ title, value, type }: CreateTransactionDTO): Transaction {
     // TODO
+    const transaction = new Transaction({
+      title,
+      value,
+      type
+    });
+    // * armazernar transaction
+    this.transactions.push(transaction);
+
+    return transaction;
   }
 }
 
