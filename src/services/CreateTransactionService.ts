@@ -19,6 +19,15 @@ class CreateTransactionService {
   // * ajustar método execute para receber as variáveis desestruturadas
   public execute({ title, value, type }: Request): Transaction {
     // TODO
+
+    // Regra de negócio, validação de saldo
+
+    const { total } = this.transactionsRepository.getBalance();
+
+    if (type == 'outcome' && value > total) {
+      throw new Error('You don`t have enough money bro')
+    }
+
     const transaction = this.transactionsRepository.create({
       title,
       value,

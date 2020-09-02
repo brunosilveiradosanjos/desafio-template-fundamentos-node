@@ -39,6 +39,7 @@ class TransactionsRepository {
         default:
           break;
       }
+      // slower solution
       // accumulator.total = accumulator.income - accumulator.outcome;
       return accumulator;
     }, {
